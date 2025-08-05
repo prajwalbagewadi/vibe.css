@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- Google Fonts: Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Load Open Sans font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* Center the content on the page */
+      body {
+        background-color: rgb(0, 0, 0); /* Set black background */
+        display: flex; /* Use flexbox for alignment */
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        height: 100vh; /* Take full viewport height */
+      }
+
+      /* Apply Open Sans font to elements */
+      .open-sans-font {
+        font-family: "Open Sans", sans-serif; /* Font family */
+        font-optical-sizing: auto; /* Auto adjust font rendering */
+        font-weight: 300; /* Light font */
+        font-style: normal; /* Normal style */
+        font-variation-settings: "wdth" 100; /* Set width of font */
+      }
+
+      /* Main card container */
+      .card {
+        width: 300px; /* Fixed width */
+        height: 450px; /* Fixed height */
+        background-color: rgb(0, 0, 0); /* Black background */
+        color: rgb(255, 255, 255); /* White text */
+        border-radius: 8px; /* Rounded corners */
+        padding: 5px; /* Inner spacing */
+        box-sizing: border-box; /* Include padding in dimensions */
+        text-align: center; /* Center text inside */
+        position: relative; /* Needed for pseudo-element positioning */
+      }
+
+      /* Custom CSS property (variable) definition */
+      @property --angle {
+        syntax: "<angle>"; /* Type of variable */
+        initial-value: 0deg; /* Default value */
+        inherits: false; /* Do not inherit */
+      }
+
+      /* Pseudo-elements for animated gradient border */
+      .card::after,
+      .card::before {
+        --angle: 0deg; /* Initialize custom angle variable */
+        content: ""; /* Required for pseudo-elements */
+        position: absolute; /* Position absolutely within .card */
+        height: 100%; /* Full height */
+        width: 100%; /* Full width */
+        background-image: conic-gradient(
+          from var(--angle),
+          #ff8000 40deg 60deg, /* Orange arc 1 */
+          transparent 70deg 180deg, /* Transparent arc */
+          #ff8000 200deg 250deg, /* Orange arc 2 */
+          transparent 240deg 360deg /* More transparent space */
+        );
+        top: 50%; /* Center vertically */
+        left: 50%; /* Center horizontally */
+        translate: -50% -50%; /* Offset to exact center */
+        z-index: -1; /* Push behind card content */
+        padding: 3px; /* Padding around card for border effect */
+        border-radius: 8px; /* Match card rounding */
+        animation: 3s spin linear infinite; /* Spin animation */
+      }
+
+      /* Glow effect with blur */
+      .card::before {
+        filter: blur(1.5rem); /* Soft glow effect */
+        opacity: 0.5; /* Lower opacity */
+      }
+
+      /* Spin animation for border */
+      @keyframes spin {
+        from {
+          --angle: 0deg; /* Start rotation */
+        }
+        to {
+          --angle: 360deg; /* Complete rotation */
+        }
+      }
+
+      /* Adds tilt and shadow effect */
+      .tilt-card {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Base shadow */
+        transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth hover */
+        perspective: 1000px; /* 3D depth */
+      }
+
+      /* Tilt and scale on hover */
+      .tilt-card:hover {
+        transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.05); /* Tilt & zoom */
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+      }
+
+      /* Style the image inside the card */
+      img {
+        max-width: 250px; /* Responsive width */
+        height: auto; /* Keep aspect ratio */
+        border-radius: 8px; /* Match card rounding */
+      }
+
+      /* Style the heading text */
+      .card h4 {
+        overflow-wrap: break-word; /* Wrap long words */
+        word-break: breakword; /* Break words as needed */
+        margin: 10px 0; /* Spacing above and below */
+      }
+
+      /* Border box inside card */
+      .card-border {
+        border: 2px solid rgb(255, 255, 255); /* White border */
+        border-radius: 8px; /* Rounded corners */
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Card with tilt effect and custom font -->
+    <div class="card tilt-card open-sans-font">
+      <!-- Product image -->
+      <img src="./assets/mcl38_.jpg" alt="" />
+
+      <!-- Bordered section for text -->
+      <div class="card-border">
+        <h4>Bburago 1:43 2024 Race McLaren MCL38 with Helmet, Piastri #81</h4>
+        <p>-20% ₹3,599</p>
+      </div>
+    </div>
+
+    <!-- JS file for tilt effect (not included in this snippet) -->
+    <script src="tilt.js"></script>
+  </body>
+</html>
